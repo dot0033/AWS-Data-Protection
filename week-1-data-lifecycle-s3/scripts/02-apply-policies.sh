@@ -8,11 +8,14 @@ ALLOWED_ROLE_ARN="${ALLOWED_ROLE_ARN:-arn:aws:iam::$ACCOUNT_ID:role/dp-lab-restr
 DIR="$(cd "$(dirname "$0")/.." && pwd)/policies"
 TMP="$(mktemp -d)"
 
+# aws.exe on Windows cannot read Git Bash paths (/tmp, /e/...), so convert them
+winpath() { cygpath -m "$1" 2>/dev/null || echo "$1"; }
+
 # Deny insecure transport on internal + confidential
 for L in internal confidential; do
   B="dp-lab-$L-$ACCOUNT_ID"
   sed "s|BUCKET|$B|g" "$DIR/bucket-policy-deny-insecure.json" > "$TMP/$L.json"
-  aws s3api put-bucket-policy --bucket "$B" --policy "file://$TMP/$L.json"
+  aws s3api put-bucket-policy --bucket "$B" --policy "file://$(winpath "$TMP/$L.json")"
   echo "Applied deny-insecure policy to $B"
 done
 
@@ -21,13 +24,15 @@ B="dp-lab-restricted-$ACCOUNT_ID"
 sed -e "s|BUCKET|$B|g" -e "s|ADMIN_ARN|$ADMIN_ARN|g" \
     -e "s|ALLOWED_ROLE_ARN|$ALLOWED_ROLE_ARN|g" \
     "$DIR/bucket-policy-restricted.json" > "$TMP/restricted.json"
-aws s3api put-bucket-policy --bucket "$B" --policy "file://$TMP/restricted.json"
+sed -i "s|ACCOUNT_ID|$ACCOUNT_ID|g" "$TMP/restricted.json"
+sed -i "s|ACCOUNT_ID|$ACCOUNT_ID|g" "$TMP/restricted.json"
+aws s3api put-bucket-policy --bucket "$B" --policy "file://$(winpath "$TMP/restricted.json")"
 echo "Applied restricted policy to $B (admin: $ADMIN_ARN)"
 
 # Lifecycle on internal bucket
 aws s3api put-bucket-lifecycle-configuration \
   --bucket "dp-lab-internal-$ACCOUNT_ID" \
-  --lifecycle-configuration "file://$DIR/lifecycle-policy.json"
+  --lifecycle-configuration "file://$(winpath "$DIR/lifecycle-policy.json")"
 echo "Applied lifecycle policy to internal bucket"
 
 # Access Point on internal bucket

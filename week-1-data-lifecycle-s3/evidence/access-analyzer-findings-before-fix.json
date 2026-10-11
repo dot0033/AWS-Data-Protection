@@ -1,0 +1,16 @@
+{
+    "findings": [
+        {
+            "id": "3ca04e39-a272-4de8-9884-83579d25ad1a",
+            "resource": "arn:aws:s3:::dp-lab-restricted-<ACCOUNT_ID>",
+            "resourceType": "AWS::S3::Bucket",
+            "createdAt": "2026-10-11T20:02:46.917000+00:00",
+            "analyzedAt": "2026-10-11T20:02:46.917000+00:00",
+            "updatedAt": "2026-10-11T20:02:46.917000+00:00",
+            "status": "ACTIVE",
+            "resourceOwnerAccount": "<ACCOUNT_ID>",
+            "error": "ACCESS_DENIED",
+            "resourceControlPolicyRestriction": "NOT_APPLICABLE"
+        }
+    ]
+}

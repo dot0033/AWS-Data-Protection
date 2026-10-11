@@ -17,7 +17,11 @@
       "Resource": ["arn:aws:s3:::BUCKET", "arn:aws:s3:::BUCKET/*"],
       "Condition": {
         "StringNotLike": {
-          "aws:PrincipalArn": ["ADMIN_ARN", "ALLOWED_ROLE_ARN"]
+          "aws:PrincipalArn": [
+            "ADMIN_ARN",
+            "ALLOWED_ROLE_ARN",
+            "arn:aws:iam::ACCOUNT_ID:role/aws-service-role/access-analyzer.amazonaws.com/AWSServiceRoleForAccessAnalyzer"
+          ]
         }
       }
     }
