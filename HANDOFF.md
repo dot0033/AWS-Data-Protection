@@ -5,7 +5,7 @@
 - The lab was run on 2026-10-11 (scripts 01 to 04). A restricted-policy fix was applied afterwards for Access Analyzer.
 - The AWS account was suspended for payment and identity verification, then reinstated. Billing was checked afterwards and showed $0.00.
 - Root sign-in is disabled on the account, so root MFA could not be enabled. Access is through the AWS Builder ID and the IAM user `lab-admin`.
-- `99-cleanup.sh` has not been run yet. Run it when the buckets are no longer needed.
+- `99-cleanup.sh` was run after Week 1 was merged. The buckets, Access Point and Analyzer no longer exist. Rebuild them with scripts 01, 02 and 03 before Week 2.
 
 ## Done so far
 - Data lifecycle, classification scheme, access review and data handling standard in `week-1-data-lifecycle-s3/docs/`.

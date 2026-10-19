@@ -2,7 +2,7 @@
 set -uo pipefail
 
 export AWS_REGION="${AWS_REGION:-eu-central-1}"
-ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text | tr -d '\r')
 
 aws s3control delete-access-point --account-id "$ACCOUNT_ID" --name analytics-ap
 aws accessanalyzer delete-analyzer --analyzer-name dp-lab-analyzer
@@ -12,9 +12,9 @@ for L in internal confidential restricted; do
   echo "Emptying $B ..."
   for TYPE in Versions DeleteMarkers; do
     aws s3api list-object-versions --bucket "$B" \
-      --query "${TYPE}[].[Key,VersionId]" --output text | \
+      --query "${TYPE}[].[Key,VersionId]" --output text | tr -d '\r' | \
     while read -r KEY VID; do
-      [ -z "$KEY" ] || [ "$KEY" = "None" ] && continue
+      { [ -z "$KEY" ] || [ "$KEY" = "None" ]; } && continue
       aws s3api delete-object --bucket "$B" --key "$KEY" --version-id "$VID" > /dev/null
     done
   done
