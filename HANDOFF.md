@@ -31,7 +31,7 @@
 - Scripts run on Windows Git Bash: aws.exe cannot read `/tmp` paths, so scripts convert paths with `cygpath`.
 - The restricted bucket policy must also allow the Access Analyzer service-linked role, otherwise the analyzer reports `ACCESS_DENIED`. See `evidence/access-analyzer-findings-before-fix.json`.
 - The Console cannot open the restricted bucket (expected). Use the CLI as `lab-admin`.
-- The account is on a paid plan with advanced features activated (irreversible). Spend limits are not available, so budgets of $1 and $20 only send email alerts.
+- The account is on a paid plan with advanced features activated (irreversible). Spend limits are not available, so budgets of $1 and $10 only send email alerts.
 - New AWS accounts can be asked for payment and identity verification. If the card belongs to another person, that person's ID is also required. Documents are sent only through the secure link AWS provides, never by email.
 - Later weeks cost money: KMS keys, Macie, GuardDuty and Secrets Manager. Run each week's cleanup script when finished.
 
