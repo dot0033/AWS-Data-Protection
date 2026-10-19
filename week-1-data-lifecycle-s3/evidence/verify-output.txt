@@ -1,0 +1,82 @@
+== 1. Upload a test file and check encryption ==
+{
+    "Expiration": "expiry-date=\"Tue, 12 Oct 2027 00:00:00 GMT\", rule-id=\"archive-and-expire\"",
+    "ETag": "\"d8e8fca2dc0f896fd7cb4cb0031ba249\"",
+    "ChecksumCRC64NVME": "2wstOANdZ/o=",
+    "ChecksumType": "FULL_OBJECT",
+    "ServerSideEncryption": "AES256",
+    "VersionId": "3UNFlRItI1ZzAnzg0ynNxJVBkBIHNLVp"
+}
+{
+    "Encryption": "AES256",
+    "Version": "3UNFlRItI1ZzAnzg0ynNxJVBkBIHNLVp"
+}
+== 2. HTTP access must be denied ==
+
+aws: [ERROR]: An error occurred (403) when calling the HeadBucket operation: Forbidden
+(denied as expected)
+== 3. Public bucket policy must be rejected ==
+
+aws: [ERROR]: An error occurred (AccessDenied) when calling the PutBucketPolicy operation: User: arn:aws:iam::<ACCOUNT_ID>:user/lab-admin is not authorized to perform: s3:PutBucketPolicy on resource: "arn:aws:s3:::dp-lab-internal-<ACCOUNT_ID>" because public policies are prevented by the BlockPublicPolicy setting in S3 Block Public Access.
+(rejected by Block Public Access as expected)
+== 4. Bucket settings ==
+--- internal ---
+{
+    "TagSet": [
+        {
+            "Key": "DataClassification",
+            "Value": "internal"
+        },
+        {
+            "Key": "Environment",
+            "Value": "lab"
+        },
+        {
+            "Key": "Owner",
+            "Value": "security-team"
+        }
+    ]
+}
+{
+    "Status": "Enabled"
+}
+--- confidential ---
+{
+    "TagSet": [
+        {
+            "Key": "DataClassification",
+            "Value": "confidential"
+        },
+        {
+            "Key": "Environment",
+            "Value": "lab"
+        },
+        {
+            "Key": "Owner",
+            "Value": "security-team"
+        }
+    ]
+}
+{
+    "Status": "Enabled"
+}
+--- restricted ---
+{
+    "TagSet": [
+        {
+            "Key": "DataClassification",
+            "Value": "restricted"
+        },
+        {
+            "Key": "Environment",
+            "Value": "lab"
+        },
+        {
+            "Key": "Owner",
+            "Value": "security-team"
+        }
+    ]
+}
+{
+    "Status": "Enabled"
+}
