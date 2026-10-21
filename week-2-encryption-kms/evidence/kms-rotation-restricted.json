@@ -1,0 +1,17 @@
+{
+    "KeyRotationEnabled": true,
+    "KeyId": "arn:aws:kms:eu-central-1:<ACCOUNT_ID>:key/25e05747-7fcd-4531-a6f1-0c822329e710",
+    "RotationPeriodInDays": 90,
+    "NextRotationDate": "2027-01-19T11:16:42.680000+00:00"
+}
+{
+    "Rotations": [
+        {
+            "KeyId": "arn:aws:kms:eu-central-1:<ACCOUNT_ID>:key/25e05747-7fcd-4531-a6f1-0c822329e710",
+            "KeyMaterialId": "484aeaafc9e041859f718565d3050da329bb1153e37626f8a62203533c64c055",
+            "KeyMaterialState": "CURRENT",
+            "RotationDate": "2026-10-21T11:27:01.362000+00:00",
+            "RotationType": "ON_DEMAND"
+        }
+    ]
+}

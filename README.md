@@ -3,8 +3,8 @@
 ## Project Status
 | Week | Topic | Status |
 |------|-------|--------|
-| 1 | Data Lifecycle, Classification & S3 Security | In progress |
-| 2 | Encryption at Rest & Key Management (KMS) | Not started |
+| 1 | Data Lifecycle, Classification & S3 Security | Complete |
+| 2 | Encryption at Rest & Key Management (KMS) | Complete |
 | 3 | Encryption in Transit, Secrets & API Protection | Not started |
 | 4 | Data in Use, DLP, Privacy & Compliance | Not started |
 

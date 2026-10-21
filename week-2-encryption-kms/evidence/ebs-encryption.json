@@ -1,0 +1,9 @@
+[
+    {
+        "Id": "vol-042a7d65b6f7454d5",
+        "Encrypted": true,
+        "KmsKeyId": "arn:aws:kms:eu-central-1:<ACCOUNT_ID>:key/94418e70-a92a-44f3-a665-ce429adfd977",
+        "Size": 1,
+        "State": "available"
+    }
+]

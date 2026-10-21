@@ -1,0 +1,122 @@
+{
+    "Version": "2012-10-17",
+    "Id": "dp-lab-restricted-key-policy",
+    "Statement": [
+        {
+            "Sid": "EnableAccountRootRecovery",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<ACCOUNT_ID>:root"
+            },
+            "Action": "kms:*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "KeyAdministrators",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<ACCOUNT_ID>:root"
+            },
+            "Action": [
+                "kms:Create*",
+                "kms:Describe*",
+                "kms:Enable*",
+                "kms:List*",
+                "kms:Put*",
+                "kms:Update*",
+                "kms:Revoke*",
+                "kms:Disable*",
+                "kms:Get*",
+                "kms:Delete*",
+                "kms:TagResource",
+                "kms:UntagResource",
+                "kms:ScheduleKeyDeletion",
+                "kms:CancelKeyDeletion",
+                "kms:RotateKeyOnDemand",
+                "kms:RetireGrant"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowRestrictedReaderDecryptViaS3",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::<ACCOUNT_ID>:root",
+                    "arn:aws:iam::<ACCOUNT_ID>:role/dp-lab-restricted-reader"
+                ]
+            },
+            "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "kms:ViaService": "s3.eu-central-1.amazonaws.com",
+                    "kms:CallerAccount": "<ACCOUNT_ID>"
+                }
+            }
+        },
+        {
+            "Sid": "AllowAdminEncryptViaS3",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<ACCOUNT_ID>:root"
+            },
+            "Action": [
+                "kms:Encrypt",
+                "kms:GenerateDataKey*",
+                "kms:ReEncrypt*"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "kms:ViaService": "s3.eu-central-1.amazonaws.com",
+                    "kms:CallerAccount": "<ACCOUNT_ID>"
+                }
+            }
+        },
+        {
+            "Sid": "DenyDataUseByAnyoneElse",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": [
+                "kms:Decrypt",
+                "kms:Encrypt",
+                "kms:GenerateDataKey*",
+                "kms:ReEncrypt*",
+                "kms:CreateGrant"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringNotLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::<ACCOUNT_ID>:root",
+                        "arn:aws:iam::<ACCOUNT_ID>:role/dp-lab-restricted-reader"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "DenyDirectUseOutsideS3",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": [
+                "kms:Decrypt",
+                "kms:Encrypt",
+                "kms:GenerateDataKey*",
+                "kms:ReEncrypt*"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringNotLike": {
+                    "aws:PrincipalArn": "arn:aws:iam::<ACCOUNT_ID>:role/dp-lab-restricted-reader"
+                },
+                "StringNotEquals": {
+                    "kms:ViaService": "s3.eu-central-1.amazonaws.com"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+[
+    {
+        "AliasName": "alias/dp-lab-confidential",
+        "AliasArn": "arn:aws:kms:eu-central-1:<ACCOUNT_ID>:alias/dp-lab-confidential",
+        "TargetKeyId": "94418e70-a92a-44f3-a665-ce429adfd977",
+        "CreationDate": "2026-10-21T11:16:38.174000+00:00",
+        "LastUpdatedDate": "2026-10-21T11:16:38.174000+00:00"
+    },
+    {
+        "AliasName": "alias/dp-lab-restricted",
+        "AliasArn": "arn:aws:kms:eu-central-1:<ACCOUNT_ID>:alias/dp-lab-restricted",
+        "TargetKeyId": "25e05747-7fcd-4531-a6f1-0c822329e710",
+        "CreationDate": "2026-10-21T11:16:40.255000+00:00",
+        "LastUpdatedDate": "2026-10-21T11:16:40.255000+00:00"
+    }
+]

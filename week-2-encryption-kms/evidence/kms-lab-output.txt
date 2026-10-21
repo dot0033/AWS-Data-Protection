@@ -1,0 +1,24 @@
+== 1. Direct encrypt/decrypt (max 4 KB) with alias/dp-lab-confidential
+ciphertext bytes: 161, decrypted: 'hello kms' (key id is read from the ciphertext)
+== 2. Envelope encryption: data key from KMS, data encrypted locally
+encrypted data key stored (184 bytes); plaintext data key discarded
+data key unwrapped by: arn:aws:kms:eu-central-1:<ACCOUNT_ID>:key/94418e70-a92a-44f3-a665-ce429adfd977
+== 3. Restricted key: direct use by lab-admin outside S3 is blocked by the key policy
+denied as expected: AccessDeniedException
+== 4. Grant: temporary GenerateDataKey/Decrypt for dp-lab-restricted-reader on the restricted key
+[
+    {
+        "Name": "dp-lab-temp-reader-grant",
+        "Grantee": "arn:aws:iam::<ACCOUNT_ID>:role/dp-lab-restricted-reader",
+        "Ops": [
+            "Decrypt",
+            "GenerateDataKey"
+        ]
+    }
+]
+caller is the account root user: reader role cannot be assumed, using IAM policy simulator
+simulate s3:GetObject on arn:aws:s3:::dp-lab-restricted-<ACCOUNT_ID>/test/rest.txt: allowed
+simulate s3:GetObject on arn:aws:s3:::dp-lab-confidential-<ACCOUNT_ID>/test/conf.txt: implicitDeny
+grant revoked; remaining grants: 0
+== 6. On-demand rotation of the restricted key
+rotation started
