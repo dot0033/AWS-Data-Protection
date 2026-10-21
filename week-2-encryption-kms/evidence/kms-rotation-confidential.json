@@ -1,0 +1,9 @@
+{
+    "KeyRotationEnabled": true,
+    "KeyId": "arn:aws:kms:eu-central-1:<ACCOUNT_ID>:key/94418e70-a92a-44f3-a665-ce429adfd977",
+    "RotationPeriodInDays": 365,
+    "NextRotationDate": "2027-10-21T11:16:42.029000+00:00"
+}
+{
+    "Rotations": []
+}

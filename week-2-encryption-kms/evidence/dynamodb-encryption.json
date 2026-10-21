@@ -1,0 +1,8 @@
+{
+    "Table": "dp-lab-confidential",
+    "SSE": {
+        "Status": "ENABLED",
+        "SSEType": "KMS",
+        "KMSMasterKeyArn": "arn:aws:kms:eu-central-1:<ACCOUNT_ID>:key/94418e70-a92a-44f3-a665-ce429adfd977"
+    }
+}

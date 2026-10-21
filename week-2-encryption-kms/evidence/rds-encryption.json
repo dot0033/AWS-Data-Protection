@@ -1,0 +1,10 @@
+[
+    {
+        "Id": "dp-lab-rds",
+        "Engine": "postgres",
+        "Class": "db.t3.micro",
+        "StorageEncrypted": true,
+        "KmsKeyId": "arn:aws:kms:eu-central-1:<ACCOUNT_ID>:key/94418e70-a92a-44f3-a665-ce429adfd977",
+        "Public": false
+    }
+]

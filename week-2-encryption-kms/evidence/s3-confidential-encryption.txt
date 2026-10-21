@@ -1,0 +1,34 @@
+## bucket encryption
+{
+    "ServerSideEncryptionConfiguration": {
+        "Rules": [
+            {
+                "ApplyServerSideEncryptionByDefault": {
+                    "SSEAlgorithm": "aws:kms",
+                    "KMSMasterKeyID": "arn:aws:kms:eu-central-1:<ACCOUNT_ID>:key/94418e70-a92a-44f3-a665-ce429adfd977"
+                },
+                "BucketKeyEnabled": true,
+                "BlockedEncryptionTypes": {
+                    "EncryptionType": [
+                        "SSE-C"
+                    ]
+                }
+            }
+        ]
+    }
+}
+## objects
+# archive/archive.txt
+{
+    "SSE": "aws:kms",
+    "KMSKey": "arn:aws:kms:eu-central-1:<ACCOUNT_ID>:key/94418e70-a92a-44f3-a665-ce429adfd977",
+    "BucketKey": true,
+    "StorageClass": "GLACIER_IR"
+}
+# test/conf.txt
+{
+    "SSE": "aws:kms",
+    "KMSKey": "arn:aws:kms:eu-central-1:<ACCOUNT_ID>:key/94418e70-a92a-44f3-a665-ce429adfd977",
+    "BucketKey": true,
+    "StorageClass": null
+}

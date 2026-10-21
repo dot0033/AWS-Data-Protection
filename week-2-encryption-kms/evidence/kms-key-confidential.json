@@ -1,0 +1,10 @@
+{
+    "KeyId": "94418e70-a92a-44f3-a665-ce429adfd977",
+    "Arn": "arn:aws:kms:eu-central-1:<ACCOUNT_ID>:key/94418e70-a92a-44f3-a665-ce429adfd977",
+    "State": "Enabled",
+    "Manager": "CUSTOMER",
+    "Spec": "SYMMETRIC_DEFAULT",
+    "Usage": "ENCRYPT_DECRYPT",
+    "Origin": "AWS_KMS",
+    "Description": "dp-lab confidential data (S3, DynamoDB, EBS, RDS)"
+}
