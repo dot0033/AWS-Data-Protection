@@ -1,0 +1,12 @@
+
+# Python virtual environments
+.venv/
+.venv-review/
+venv/
+
+# Python temporary files
+__pycache__/
+*.py[cod]
+
+# Pytest cache
+.pytest_cache/

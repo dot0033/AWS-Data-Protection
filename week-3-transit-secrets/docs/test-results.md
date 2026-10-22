@@ -44,3 +44,13 @@
 - `/week3/dev/demo-secret` is a standard-tier `SecureString` encrypted using AWS KMS.
 - Reading the `SecureString` without `--with-decryption` returned ciphertext; reading it with `--with-decryption` returned the expected test value.
 - The test value is a harmless demo value, not a real credential.
+
+## Current Review Run — 22 October 2026
+
+- Environment: Python 3.14.4 in the local `.venv-review` virtual environment.
+- Frameworks: pytest 9.1.1 and FastAPI.
+- Result: 5 passed, 0 failed, 1 deprecation warning.
+- Evidence: `evidence/api/06-pytest-results-review.txt`.
+- Warning: `StarletteDeprecationWarning` reports that using `httpx` with `starlette.testclient` is deprecated. The warning did not cause test failures.
+- Scope: These tests ran locally. They do not demonstrate deployment of the API to AWS.
+- Previous test evidence has been retained unchanged.

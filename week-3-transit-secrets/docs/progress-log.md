@@ -3,7 +3,7 @@
 ## Session 1 — Project Setup
 
 - Status: Project files and documentation are present locally.
-- Project directory: `~/aws-week3-security`
+- Project directory: `~/AWS-Data-Protection-upload-review/week-3-transit-secrets`
 - Python environment: `.venv`
 - Exact setup date: Not recorded.
 - Evidence: Project documentation and source files.
@@ -49,3 +49,15 @@
 - Secret review: Must be completed before sharing or publishing the project.
 - Git branch, commit, and push: Not recorded; GitHub work is currently paused.
 - Remaining work: Inspect evidence image contents, review files for accidental secrets before sharing, and confirm the final deliverables against the assignment requirements.
+
+## Session 6 — Current Review Run
+
+- Recorded date: 22 October 2026.
+- Project directory: `~/AWS-Data-Protection-upload-review/week-3-transit-secrets`.
+- Python environment: `.venv-review` using Python 3.14.4.
+- Test framework: pytest 9.1.1.
+- API test result: 5 passed, 0 failed, 1 deprecation warning.
+- Evidence: `evidence/api/06-pytest-results-review.txt`.
+- Warning: `StarletteDeprecationWarning` related to `httpx` and `starlette.testclient`; tests passed despite the warning.
+- Scope: Local API tests only; AWS deployment remains unconfirmed.
+- - Git status: `.gitignore`, current test evidence, and documentation updates were prepared for staging and review; no commit or push performed.
