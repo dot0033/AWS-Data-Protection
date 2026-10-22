@@ -1,0 +1,8 @@
+AWS SecureString Decryption Verification
+Region: eu-central-1
+Parameter: /week3/dev/demo-secret
+Type: SecureString
+Version: 1
+GetParameter with --with-decryption: SUCCESS
+Value returned: True
+Secret value intentionally excluded from evidence.

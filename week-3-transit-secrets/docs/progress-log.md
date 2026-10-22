@@ -4,7 +4,7 @@
 
 - Status: Project files and documentation are present locally.
 - Project directory: `~/AWS-Data-Protection-upload-review/week-3-transit-secrets`
-- Python environment: `.venv`
+- Python environment: `.venv` was recorded during initial setup; the current verified test environment is `.venv-review`.
 - Exact setup date: Not recorded.
 - Evidence: Project documentation and source files.
 
@@ -45,8 +45,9 @@
 ## Session 5 — Final Review
 
 - Latest recorded API test result: 5 passed.
-- Documentation consistency review: README and core status wording reviewed; final evidence and secret review remain.
-- Secret review: Must be completed before sharing or publishing the project.
+- Documentation consistency review: README and core status wording reviewed.
+- Initial secret scan: Selected sensitive filenames and common text patterns were checked; no matches were found in the inspected scope. This is not a guarantee that all files and images are free of secrets.
+- Remaining review: Inspect evidence images and compare the final deliverables against the assignment requirements before sharing or publishing.
 - Git branch, commit, and push: Not recorded; GitHub work is currently paused.
 - Remaining work: Inspect evidence image contents, review files for accidental secrets before sharing, and confirm the final deliverables against the assignment requirements.
 
@@ -60,4 +61,4 @@
 - Evidence: `evidence/api/06-pytest-results-review.txt`.
 - Warning: `StarletteDeprecationWarning` related to `httpx` and `starlette.testclient`; tests passed despite the warning.
 - Scope: Local API tests only; AWS deployment remains unconfirmed.
-- - Git status: `.gitignore`, current test evidence, and documentation updates were prepared for staging and review; no commit or push performed.
+- Git status: `.gitignore`, current test evidence, and documentation updates were prepared for staging and review; no commit or push performed.

@@ -3,3 +3,16 @@
 .envcredentials
 .aws/
 *.csv
+
+# Local environment files and credentials
+.env
+.env.*
+!.env.example
+**/.aws/
+**/.venv/
+**/.venv-review/
+**/venv/
+**/__pycache__/
+**/.pytest_cache/
+*.p12
+*.pfx
