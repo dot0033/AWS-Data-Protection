@@ -12,14 +12,16 @@
 | Highest severity | High |
 | False positives | 0 (`public-faq.txt` correctly returned no findings) |
 | Tool used | `scripts/06-pii-scan.py` (Macie substitute, see below) |
-| Amazon Macie job | Not run: account returned `SubscriptionRequiredException` |
+| Amazon Macie job | Not run: the account is on the AWS Free plan, which does not include Macie |
 
 ## Why Macie itself did not run
 
-`aws macie2 enable-macie` failed with `SubscriptionRequiredException` ("The AWS Access Key Id needs a subscription for the service"). GuardDuty and Security Hub returned the same error, while S3, STS and CloudTrail worked. The account is not activated for these security services, and activating it needs an account owner action (support case / account verification), not a configuration change.
+`aws macie2 enable-macie` failed with `SubscriptionRequiredException` ("The AWS Access Key Id needs a subscription for the service"). GuardDuty and Security Hub returned the same error, while S3, STS and CloudTrail worked.
+
+The cause is the account plan. `aws freetier get-account-plan-state` returns `accountPlanType: FREE`. The AWS Free plan does not include Macie, GuardDuty or Security Hub; they become available only after upgrading the account to the paid plan. Upgrading is irreversible and was not done, to keep the project at $0 and within the Free plan.
 Evidence: `evidence/02-macie-guardduty-subscription-error.txt`, `evidence/02-macie-subscription-error.png`.
 
-To keep the lab at $0 and still produce real findings, the same discovery logic was run with a small Python scanner. The Macie job script (`scripts/02-macie-scan.sh`) is included and ready to run as soon as the subscription is active.
+To keep the lab at $0 and still produce real findings, the same discovery logic was run with a small Python scanner. The Macie job script (`scripts/02-macie-scan.sh`) is included and ready to run if the account is upgraded to the paid plan.
 
 ## Method
 
@@ -47,7 +49,7 @@ Totals: 20 sensitive values in 3 objects. Full output: `evidence/pii-scan-findin
 | Passport number and date of birth in a support ticket | Identity theft; GDPR personal data | Redact in the ticketing tool before export; shorten retention |
 | Public FAQ | None | Correctly classified as public |
 
-## Macie configuration to use when the subscription is active
+## Macie configuration to use after upgrading to the paid plan
 
 | Setting | Value | Reason |
 |---------|-------|--------|
@@ -66,5 +68,5 @@ Totals: 20 sensitive values in 3 objects. Full output: `evidence/pii-scan-findin
 | S3 storage and requests (1.1 KB, about 15 minutes) | ~$0.00 |
 | CloudTrail event history | Free |
 | CloudShell | Free |
-| Macie / GuardDuty | $0 (not activated) |
+| Macie / GuardDuty | $0 (not available on the Free plan) |
 | **Total** | **~$0.00** |

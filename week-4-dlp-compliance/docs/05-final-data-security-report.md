@@ -9,7 +9,7 @@
 
 Over four weeks the project built and tested a layered data protection setup on AWS: classification and access control for S3 (Week 1), KMS encryption with separated keys (Week 2), encryption in transit and secrets management (Week 3), and sensitive data discovery, DLP and compliance mapping (Week 4).
 
-In Week 4, a discovery scan of a test bucket found sensitive data in 3 of 4 objects (credentials, card numbers, SSNs, passport number), with no false positive on the public file, and all 6 control checks passed. Amazon Macie and GuardDuty could not be enabled because the account is not subscribed to them (`SubscriptionRequiredException`); a $0 substitute scanner and CloudTrail evidence were used, and ready-to-run scripts are included for when the services are activated.
+In Week 4, a discovery scan of a test bucket found sensitive data in 3 of 4 objects (credentials, card numbers, SSNs, passport number), with no false positive on the public file, and all 6 control checks passed. Amazon Macie and GuardDuty could not be enabled because the account is on the AWS Free plan, which does not include them (`SubscriptionRequiredException`). The project stayed on the Free plan, so a $0 substitute scanner and CloudTrail evidence were used, and ready-to-run scripts are included for an upgraded account.
 
 Overall: 13 of 18 mapped controls verified, 3 designed, 2 out of scope (legal/organisational). The main open risks are the missing managed threat detection (R7, R9) and use of the root user for labs (R8).
 
@@ -36,7 +36,7 @@ Each week used scripts that create resources, verify them and clean them up. Evi
 | Encryption in transit | Deny insecure transport, TLS certificate exercise | W1 policy, W3 local TLS lab |
 | Secrets | Parameter Store SecureString, no secrets in repo | W3 |
 | Discovery | Macie-style scan of S3 objects | W4: 3/4 objects flagged, 20 sensitive values, 0 false positives |
-| Detection | CloudTrail event history of config changes; GuardDuty design | W4: 4 events recorded; GuardDuty not activated |
+| Detection | CloudTrail event history of config changes; GuardDuty design | W4: 4 events recorded; GuardDuty not available on Free plan |
 | DLP | Discover / protect / detect / respond plan with response times | W4 `02-dlp-plan.md` |
 | Compliance | GDPR, HIPAA, PCI DSS mapping | W4 `03-compliance-control-matrix.md` |
 | Risk | 13-item risk register with owners | W4 `04-data-protection-risk-register.md` |
@@ -59,8 +59,8 @@ Findings: `app-config.env` (AWS credentials, High), `customers.csv` (cards, SSNs
 
 | Planned | Actual | Reason | Impact |
 |---------|--------|--------|--------|
-| Amazon Macie classification job | Python substitute with Macie-style identifiers | Account not subscribed to Macie | Same findings type and logic; no Macie console evidence |
-| GuardDuty sample findings | Design document + CloudTrail evidence | Account not subscribed to GuardDuty | Threat detection not demonstrated live |
+| Amazon Macie classification job | Python substitute with Macie-style identifiers | AWS Free plan does not include Macie | Same findings type and logic; no Macie console evidence |
+| GuardDuty sample findings | Design document + CloudTrail evidence | AWS Free plan does not include GuardDuty | Threat detection not demonstrated live |
 | Restricted bucket with SSE-KMS | SSE-S3 on the temporary lab bucket | Avoid KMS key charges for a 15-minute lab; W2 already proved SSE-KMS | Documented; restricted data in production must use SSE-KMS |
 | Run as lab-admin | Run as root | Console session was root, as in W2 | Recorded as risk R8 |
 
@@ -68,7 +68,7 @@ Findings: `app-config.env` (AWS credentials, High), `customers.csv` (cards, SSNs
 
 | Priority | Recommendation | Risk ID |
 |----------|----------------|---------|
-| 1 | Ask AWS Support to activate Macie, GuardDuty and Security Hub, then run `02-macie-scan.sh` and `03-guardduty.sh` | R1, R7, R9 |
+| 1 | Upgrade the account to the paid plan to get Macie, GuardDuty and Security Hub, then run `02-macie-scan.sh` and `03-guardduty.sh` | R1, R7, R9 |
 | 2 | Use lab-admin or a scoped role for all future work; keep root for account tasks only | R8 |
 | 3 | Create a CloudTrail trail with S3 data events for restricted buckets, stored with Object Lock | R7, R13 |
 | 4 | Add the data perimeter Deny statement to confidential and restricted bucket policies | R7 |
@@ -80,7 +80,7 @@ Findings: `app-config.env` (AWS credentials, High), `customers.csv` (cards, SSNs
 | Evidence | File |
 |----------|------|
 | Sample bucket created and objects uploaded | `evidence/01-bucket-objects.txt`, `evidence/01-sample-bucket-created.png` |
-| Macie / GuardDuty / Security Hub not available | `evidence/02-macie-guardduty-subscription-error.txt`, `evidence/02-*.png` |
+| Macie / GuardDuty / Security Hub not available (Free plan) | `evidence/02-macie-guardduty-subscription-error.txt`, `evidence/02-*.png` |
 | Sensitive data findings | `evidence/pii-scan-findings.json`, `evidence/06-pii-scan-output.txt` |
 | Control verification | `evidence/05-verify-result.txt`, `evidence/06-pii-scan-cloudtrail-verify.png` |
 | Configuration change trail | `evidence/07-cloudtrail-events.txt` |
@@ -89,4 +89,4 @@ Findings: `app-config.env` (AWS credentials, High), `customers.csv` (cards, SSNs
 
 ## 8. Cost
 
-Week 4 cost about $0.00: one small S3 bucket for about 15 minutes, CloudShell and CloudTrail event history are free, and Macie/GuardDuty were not activated. All Week 4 resources were deleted (`aws s3 ls | grep -c dp-lab-w4` returned 0).
+Week 4 cost about $0.00: one small S3 bucket for about 15 minutes, CloudShell and CloudTrail event history are free, and Macie/GuardDuty are not available on the Free plan. All Week 4 resources were deleted (`aws s3 ls | grep -c dp-lab-w4` returned 0).

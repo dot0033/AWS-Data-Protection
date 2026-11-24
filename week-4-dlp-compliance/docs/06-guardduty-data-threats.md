@@ -2,7 +2,7 @@
 
 ## Status
 
-GuardDuty could not be enabled: `aws guardduty list-detectors` returned `SubscriptionRequiredException` on 2026-11-24 (`evidence/02-macie-guardduty-subscription-error.txt`). This document is the design and runbook; `scripts/03-guardduty.sh` enables it and generates sample findings once the account is activated.
+GuardDuty could not be enabled: `aws guardduty list-detectors` returned `SubscriptionRequiredException` on 2026-11-24 (`evidence/02-macie-guardduty-subscription-error.txt`) because the account is on the AWS Free plan, which does not include GuardDuty. This document is the design and runbook; `scripts/03-guardduty.sh` enables it and generates sample findings if the account is upgraded to the paid plan.
 
 ## What GuardDuty S3 Protection watches
 

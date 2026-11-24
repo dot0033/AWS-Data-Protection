@@ -16,7 +16,7 @@ Status key: **Verified** = run in the lab with evidence. **Designed** = document
 | 8 | Encryption in transit (TLS, deny insecure transport) | W1 `bucket-policy-deny-insecure.json`, W3 `docs/tls-acm.md` | Art. 32(1)(a) | 164.312(e)(1) transmission security | 4.2 strong cryptography in transit | Verified |
 | 9 | Secrets management | W3 Parameter Store SecureString | Art. 32 | 164.312(d) authentication | 8.3.2, 8.6 protect credentials | Verified (W3) |
 | 10 | Sensitive data discovery | W4 `01-macie-findings-report.md`, `pii-scan-findings.json` | Art. 30, Art. 35 (DPIA input) | 164.308(a)(1)(ii)(A) risk analysis | 12.5.2 locate cardholder data | Verified (substitute scan); Macie: Gap |
-| 11 | Threat detection on data stores | W4 `06-guardduty-data-threats.md` | Art. 32, Art. 33 breach detection | 164.308(a)(6) incident procedures | 10.7, 11.5 detect intrusions | Designed (GuardDuty not activated) |
+| 11 | Threat detection on data stores | W4 `06-guardduty-data-threats.md` | Art. 32, Art. 33 breach detection | 164.308(a)(6) incident procedures | 10.7, 11.5 detect intrusions | Designed (GuardDuty not on Free plan) |
 | 12 | Audit logging of data access and config changes | CloudTrail event history, W4 `07-cloudtrail-events.txt` | Art. 5(2) accountability | 164.312(b) audit controls | 10.2 audit logs | Verified (management events); S3 data events: Gap |
 | 13 | DLP policy and incident response | W4 `02-dlp-plan.md` | Art. 33-34 breach notification (72 h) | 164.308(a)(6) | 12.10 incident response plan | Designed |
 | 14 | Data minimisation and masking | W4 DLP rules 3 and 5, masked findings | Art. 5(1)(c) data minimisation | 164.514 de-identification | 3.4 mask PAN when displayed | Designed |
@@ -37,7 +37,7 @@ Rows 10 and 12 count as Verified for the part that ran (substitute scan, managem
 
 ## Open gaps and next steps
 
-1. Activate Macie and GuardDuty on the account, then run `scripts/02-macie-scan.sh` and `scripts/03-guardduty.sh` (rows 10, 11).
+1. Upgrade the account from the AWS Free plan to the paid plan (Macie and GuardDuty are not included in the Free plan), then run `scripts/02-macie-scan.sh` and `scripts/03-guardduty.sh` (rows 10, 11).
 2. Create a CloudTrail trail with S3 data events for the restricted bucket, delivered to a separate log bucket with Object Lock (row 12, PCI 10.5).
 3. Data subject request process and processor agreements are organisational and legal tasks outside this technical lab (rows 17, 18).
 4. A real PCI DSS environment would also need network segmentation, vulnerability scanning and a QSA assessment; this lab only shows the data protection controls.
