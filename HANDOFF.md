@@ -8,11 +8,14 @@
 - The Week 2 lab was run as the account **root user** (the console was signed in as root). Because root cannot assume roles, the reader role was checked with the IAM policy simulator. Next labs should run as `lab-admin` or a scoped admin role.
 - The AWS account was suspended for payment and identity verification, then reinstated. Billing was checked afterwards and showed $0.00.
 - Access is through the AWS Builder ID and the IAM user lab-admin.
+- Week 3 is complete (see `week-3-transit-secrets/README.md`).
+- Week 4 is complete within its documented scope. See the Week 4 status section below.
 
 ## Done so far
 
 - Week 1: data lifecycle, classification scheme, access review and data handling standard in `week-1-data-lifecycle-s3/docs/`; bucket policies and lifecycle policy in `policies/`, lab scripts in `scripts/`, evidence in `evidence/`.
 - Week 2: docs in `week-2-encryption-kms/docs/`, key/IAM/bucket policy templates in `policies/`, scripts in `scripts/`, evidence in `evidence/`.
+- Week 4: deliverables in `week-4-dlp-compliance/docs/`, Macie/EventBridge policy snippets in `policies/`, scripts in `scripts/`, synthetic test data in `sample-data/`, evidence in `evidence/`.
 
 ## Conventions
 
@@ -39,15 +42,24 @@
 - Scripts run on Windows Git Bash and CloudShell: aws.exe cannot read /tmp paths, so scripts convert paths with cygpath when it exists.
 - The restricted bucket policy must also allow the Access Analyzer service-linked role, otherwise the analyzer reports ACCESS_DENIED.
 - The Console cannot open the restricted bucket (expected). Use the CLI.
-- The account is on a paid plan with advanced features activated (irreversible). Spend limits are not available, so budgets of $1 and $10 only send email alerts.
+- The account is on the **AWS Free plan** (`aws freetier get-account-plan-state` -> `accountPlanType: FREE`, checked 2026-11-24). The Free plan does not include Macie, GuardDuty or Security Hub. Upgrading to the paid plan is irreversible; the project stayed on the Free plan. Budgets of $1 and $10 send email alerts.
 - New AWS accounts can be asked for payment and identity verification. If the card belongs to another person, that person's ID is also required. Documents are sent only through the secure link AWS provides, never by email.
-- Later weeks cost money: Macie, GuardDuty and Secrets Manager. Run each week's cleanup script when finished.
+- Macie and GuardDuty are not available on the Free plan; Secrets Manager costs money. Run each week's cleanup script when finished.
+
+## Week 4 status (2026-11-24)
+
+- Week 4 is complete within the documented scope: Macie findings report, DLP plan, compliance control matrix (GDPR/HIPAA/PCI DSS), risk register and final audit-ready report in `week-4-dlp-compliance/docs/`.
+- Macie, GuardDuty and Security Hub return `SubscriptionRequiredException` because the account is on the AWS Free plan, which does not include them (S3, STS, CloudTrail work). The project stayed on the Free plan, so `scripts/06-pii-scan.py` (Macie-style scanner) and CloudTrail event history were used instead.
+- Only if the account is upgraded to the paid plan: add the statements in `week-4-dlp-compliance/policies/macie-restricted-*.json` to the restricted bucket and key policies, then run `scripts/02-macie-scan.sh` and `scripts/03-guardduty.sh`, then `99-cleanup.sh`.
+- The Week 4 lab ran as root again (console session). Lab bucket deleted; cost about $0.00.
+- `sample-data/app-config.env` (AWS documentation example keys) was not uploaded by the automated upload; add it manually if you want to rerun the credentials detection.
 
 ## How to verify
 
 ```
 bash week-1-data-lifecycle-s3/scripts/04-verify.sh
 bash week-2-encryption-kms/scripts/05-verify.sh
+bash week-4-dlp-compliance/scripts/05-verify.sh   # after 01 and 06 have run
 ```
 
 ## Cleanup
@@ -55,4 +67,5 @@ bash week-2-encryption-kms/scripts/05-verify.sh
 ```
 bash week-1-data-lifecycle-s3/scripts/99-cleanup.sh
 bash week-2-encryption-kms/scripts/99-cleanup.sh
+bash week-4-dlp-compliance/scripts/99-cleanup.sh
 ```

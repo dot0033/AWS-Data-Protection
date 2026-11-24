@@ -1,0 +1,5 @@
+Ticket 7781 - billing dispute
+Customer: Sarah Johnson, date of birth 1990-04-12
+Passport number: 123456789 (US passport)
+Card used: credit card number 4012 8888 8888 1881 exp 12/28
+Agent note: customer asked us to update her phone to (646) 555-0123.

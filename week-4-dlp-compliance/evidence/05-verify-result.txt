@@ -1,0 +1,8 @@
+$ bash scripts/05-verify.sh
+PASS  Bucket exists
+PASS  Block Public Access: all 4 settings on
+PASS  Default encryption (SSE-S3)
+PASS  DataClassification=restricted tag
+PASS  Sensitive data discovered by scan
+PASS  No false positive on public-faq.txt
+Result: 6 passed, 0 failed

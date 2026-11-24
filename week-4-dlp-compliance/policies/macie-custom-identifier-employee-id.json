@@ -1,0 +1,8 @@
+{
+  "_comment": "Example Macie custom data identifier for an internal ID format. Create with: aws macie2 create-custom-data-identifier --cli-input-json file://policies/macie-custom-identifier-employee-id.json (remove this _comment key first).",
+  "name": "dp-lab-employee-id",
+  "description": "Internal employee ID, format EMP-123456",
+  "regex": "EMP-[0-9]{6}",
+  "keywords": ["employee", "emp id", "staff"],
+  "maximumMatchDistance": 50
+}

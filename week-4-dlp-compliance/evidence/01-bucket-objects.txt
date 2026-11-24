@@ -1,0 +1,5 @@
+# aws s3 ls s3://dp-lab-w4-sample-<ACCOUNT_ID>/   (2026-11-24, eu-central-1)
+2026-11-24 12:42:29        182 app-config.env
+2026-11-24 12:42:29        510 customers.csv
+2026-11-24 12:42:29        156 public-faq.txt
+2026-11-24 12:42:29        250 support-ticket.txt

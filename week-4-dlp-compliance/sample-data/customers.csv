@@ -1,0 +1,4 @@
+customer_id,full_name,email,phone,ssn,credit_card_number,billing_address
+C-1001,John Carter,john.carter@example.com,(202) 555-0147,SSN 123-45-6789,credit card 4111 1111 1111 1111,"1600 Pennsylvania Ave NW, Washington, DC 20500"
+C-1002,Maria Lopez,maria.lopez@example.com,(415) 555-0199,SSN 234-56-7890,credit card 5555 5555 5555 4444,"1 Market St, San Francisco, CA 94105"
+C-1003,David Kim,david.kim@example.com,(312) 555-0102,SSN 345-67-8901,credit card 3782 822463 10005,"233 S Wacker Dr, Chicago, IL 60606"
