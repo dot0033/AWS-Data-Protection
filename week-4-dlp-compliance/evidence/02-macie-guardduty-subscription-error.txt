@@ -13,5 +13,13 @@ aws: [ERROR]: An error occurred (SubscriptionRequiredException) when calling the
 
 $ aws s3api list-buckets --query 'length(Buckets)'
 1
-# S3, STS and CloudTrail work. Macie, GuardDuty and Security Hub are not
-# activated for this account, so they could not be enabled from the CLI.
+$ aws freetier get-account-plan-state --region us-east-1
+{
+    "accountId": "<ACCOUNT_ID>",
+    "accountPlanType": "FREE",
+    "accountPlanStatus": "ACTIVE",
+    ...
+}
+# S3, STS and CloudTrail work. The account is on the AWS Free plan, which does
+# not include Macie, GuardDuty or Security Hub. They become available only
+# after upgrading to the paid plan (irreversible); the project stayed on Free.
