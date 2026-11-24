@@ -1,0 +1,113 @@
+{
+    "generatedAt": "2026-11-24T12:48:59.553968Z",
+    "tool": "06-pii-scan.py (Macie substitute)",
+    "bucket": "dp-lab-w4-sample-<ACCOUNT_ID>",
+    "objectsScanned": 4,
+    "objectsWithFindings": 3,
+    "findings": [
+        {
+            "type": "SensitiveData:S3Object/Credentials",
+            "severity": "High",
+            "bucket": "dp-lab-w4-sample-<ACCOUNT_ID>",
+            "key": "app-config.env",
+            "sizeBytes": 182,
+            "detections": [
+                {
+                    "type": "AWS_CREDENTIALS",
+                    "category": "CREDENTIALS",
+                    "count": 2,
+                    "maskedExamples": [
+                        "AK****************LE",
+                        "wJ************************************EY"
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "SensitiveData:S3Object/Multiple",
+            "severity": "High",
+            "bucket": "dp-lab-w4-sample-<ACCOUNT_ID>",
+            "key": "customers.csv",
+            "sizeBytes": 510,
+            "detections": [
+                {
+                    "type": "CREDIT_CARD_NUMBER",
+                    "category": "FINANCIAL_INFORMATION",
+                    "count": 3,
+                    "maskedExamples": [
+                        "41***************11",
+                        "55***************44"
+                    ]
+                },
+                {
+                    "type": "USA_SOCIAL_SECURITY_NUMBER",
+                    "category": "PERSONAL_INFORMATION",
+                    "count": 3,
+                    "maskedExamples": [
+                        "12*******89",
+                        "23*******90"
+                    ]
+                },
+                {
+                    "type": "EMAIL_ADDRESS",
+                    "category": "PERSONAL_INFORMATION",
+                    "count": 3,
+                    "maskedExamples": [
+                        "jo*******************om",
+                        "ma*******************om"
+                    ]
+                },
+                {
+                    "type": "PHONE_NUMBER",
+                    "category": "PERSONAL_INFORMATION",
+                    "count": 3,
+                    "maskedExamples": [
+                        "(2**********47",
+                        "(4**********99"
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "SensitiveData:S3Object/Multiple",
+            "severity": "High",
+            "bucket": "dp-lab-w4-sample-<ACCOUNT_ID>",
+            "key": "support-ticket.txt",
+            "sizeBytes": 250,
+            "detections": [
+                {
+                    "type": "CREDIT_CARD_NUMBER",
+                    "category": "FINANCIAL_INFORMATION",
+                    "count": 1,
+                    "maskedExamples": [
+                        "40***************81"
+                    ]
+                },
+                {
+                    "type": "USA_PASSPORT_NUMBER",
+                    "category": "PERSONAL_INFORMATION",
+                    "count": 1,
+                    "maskedExamples": [
+                        "12*****89"
+                    ]
+                },
+                {
+                    "type": "PHONE_NUMBER",
+                    "category": "PERSONAL_INFORMATION",
+                    "count": 1,
+                    "maskedExamples": [
+                        "(6**********23"
+                    ]
+                },
+                {
+                    "type": "DATE_OF_BIRTH",
+                    "category": "PERSONAL_INFORMATION",
+                    "count": 1,
+                    "maskedExamples": [
+                        "19******12"
+                    ]
+                }
+            ]
+        }
+    ]
+}

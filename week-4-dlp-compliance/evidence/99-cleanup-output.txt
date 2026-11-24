@@ -1,0 +1,9 @@
+$ bash scripts/99-cleanup.sh
+delete: s3://dp-lab-w4-sample-<ACCOUNT_ID>/public-faq.txt
+delete: s3://dp-lab-w4-sample-<ACCOUNT_ID>/support-ticket.txt
+delete: s3://dp-lab-w4-sample-<ACCOUNT_ID>/customers.csv
+delete: s3://dp-lab-w4-sample-<ACCOUNT_ID>/app-config.env
+aws: [ERROR] ... (SubscriptionRequiredException) when calling the DisableMacie operation   <- expected, Macie was never enabled
+aws: [ERROR] ... (SubscriptionRequiredException) when calling the ListDetectors operation  <- expected, GuardDuty was never enabled
+$ aws s3 ls | grep -c dp-lab-w4
+0

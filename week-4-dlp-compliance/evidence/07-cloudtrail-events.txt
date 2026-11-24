@@ -1,0 +1,5 @@
+# bash scripts/07-cloudtrail-evidence.sh  (CloudTrail event history, eu-central-1)
+2026-11-24T12:42:25+00:00	CreateBucket	root
+2026-11-24T12:42:25+00:00	PutBucketPublicAccessBlock	root
+2026-11-24T12:42:26+00:00	PutBucketEncryption	root
+2026-11-24T12:42:27+00:00	PutBucketTagging	root

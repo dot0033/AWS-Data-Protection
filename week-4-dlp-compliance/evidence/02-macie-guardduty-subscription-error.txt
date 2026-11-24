@@ -1,0 +1,17 @@
+# 2026-11-24, eu-central-1, AWS CloudShell (signed in as account root)
+$ aws macie2 enable-macie
+aws: [ERROR]: An error occurred (SubscriptionRequiredException) when calling the EnableMacie operation: The AWS Access Key Id needs a subscription for the service
+
+$ aws macie2 get-macie-session --query status
+aws: [ERROR]: An error occurred (SubscriptionRequiredException) when calling the GetMacieSession operation: The AWS Access Key Id needs a subscription for the service
+
+$ aws guardduty list-detectors
+aws: [ERROR]: An error occurred (SubscriptionRequiredException) when calling the ListDetectors operation: The AWS Access Key Id needs a subscription for the service
+
+$ aws securityhub describe-hub
+aws: [ERROR]: An error occurred (SubscriptionRequiredException) when calling the DescribeHub operation: The AWS Access Key Id needs a subscription for the service
+
+$ aws s3api list-buckets --query 'length(Buckets)'
+1
+# S3, STS and CloudTrail work. Macie, GuardDuty and Security Hub are not
+# activated for this account, so they could not be enabled from the CLI.

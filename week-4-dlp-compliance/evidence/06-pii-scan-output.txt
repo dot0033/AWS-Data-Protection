@@ -1,0 +1,5 @@
+$ python3 scripts/06-pii-scan.py dp-lab-w4-sample-<ACCOUNT_ID>
+Scanned 4 objects, 3 with sensitive data
+  [High  ] SensitiveData:S3Object/Credentials app-config.env       AWS_CREDENTIALSx2
+  [High  ] SensitiveData:S3Object/Multiple    customers.csv        CREDIT_CARD_NUMBERx3, USA_SOCIAL_SECURITY_NUMBERx3, EMAIL_ADDRESSx3, PHONE_NUMBERx3
+  [High  ] SensitiveData:S3Object/Multiple    support-ticket.txt   CREDIT_CARD_NUMBERx1, USA_PASSPORT_NUMBERx1, PHONE_NUMBERx1, DATE_OF_BIRTHx1
