@@ -42,15 +42,15 @@
 - Scripts run on Windows Git Bash and CloudShell: aws.exe cannot read /tmp paths, so scripts convert paths with cygpath when it exists.
 - The restricted bucket policy must also allow the Access Analyzer service-linked role, otherwise the analyzer reports ACCESS_DENIED.
 - The Console cannot open the restricted bucket (expected). Use the CLI.
-- The account is on a paid plan with advanced features activated (irreversible). Spend limits are not available, so budgets of $1 and $10 only send email alerts.
+- The account is on the **AWS Free plan** (`aws freetier get-account-plan-state` -> `accountPlanType: FREE`, checked 2026-11-24). The Free plan does not include Macie, GuardDuty or Security Hub. Upgrading to the paid plan is irreversible; the project stayed on the Free plan. Budgets of $1 and $10 send email alerts.
 - New AWS accounts can be asked for payment and identity verification. If the card belongs to another person, that person's ID is also required. Documents are sent only through the secure link AWS provides, never by email.
-- Later weeks cost money: Macie, GuardDuty and Secrets Manager. Run each week's cleanup script when finished.
+- Macie and GuardDuty are not available on the Free plan; Secrets Manager costs money. Run each week's cleanup script when finished.
 
 ## Week 4 status (2026-11-24)
 
 - Week 4 is complete within the documented scope: Macie findings report, DLP plan, compliance control matrix (GDPR/HIPAA/PCI DSS), risk register and final audit-ready report in `week-4-dlp-compliance/docs/`.
-- Macie, GuardDuty and Security Hub return `SubscriptionRequiredException` on this account (S3, STS, CloudTrail work). They cannot be turned on from the CLI; the account owner must ask AWS Support to activate them. Until then, `scripts/06-pii-scan.py` (Macie-style scanner) and CloudTrail event history were used.
-- When the services are activated: add the statements in `week-4-dlp-compliance/policies/macie-restricted-*.json` to the restricted bucket and key policies, then run `scripts/02-macie-scan.sh` and `scripts/03-guardduty.sh`, then `99-cleanup.sh`.
+- Macie, GuardDuty and Security Hub return `SubscriptionRequiredException` because the account is on the AWS Free plan, which does not include them (S3, STS, CloudTrail work). The project stayed on the Free plan, so `scripts/06-pii-scan.py` (Macie-style scanner) and CloudTrail event history were used instead.
+- Only if the account is upgraded to the paid plan: add the statements in `week-4-dlp-compliance/policies/macie-restricted-*.json` to the restricted bucket and key policies, then run `scripts/02-macie-scan.sh` and `scripts/03-guardduty.sh`, then `99-cleanup.sh`.
 - The Week 4 lab ran as root again (console session). Lab bucket deleted; cost about $0.00.
 - `sample-data/app-config.env` (AWS documentation example keys) was not uploaded by the automated upload; add it manually if you want to rerun the credentials detection.
 
