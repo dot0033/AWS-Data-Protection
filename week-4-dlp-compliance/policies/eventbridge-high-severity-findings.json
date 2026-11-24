@@ -1,0 +1,9 @@
+{
+  "_comment": "EventBridge rule pattern: route High-severity Macie findings and GuardDuty S3 findings (severity >= 7) to an SNS topic for the on-call owner.",
+  "source": ["aws.macie", "aws.guardduty"],
+  "detail-type": ["Macie Finding", "GuardDuty Finding"],
+  "$or": [
+    { "detail": { "severity": { "description": ["High"] } } },
+    { "detail": { "severity": [{ "numeric": [">=", 7] }], "resource": { "resourceType": ["S3Bucket"] } } }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "_comment": "Add to the alias/dp-lab-restricted key policy AND add the same role ARN to the aws:PrincipalArn exceptions of both existing Deny statements. Lets Macie decrypt SSE-KMS objects it scans.",
+  "Sid": "AllowMacieDecryptForClassification",
+  "Effect": "Allow",
+  "Principal": {
+    "AWS": "arn:aws:iam::<ACCOUNT_ID>:role/aws-service-role/macie.amazonaws.com/AWSServiceRoleForAmazonMacie"
+  },
+  "Action": ["kms:Decrypt", "kms:DescribeKey"],
+  "Resource": "*",
+  "Condition": {
+    "StringEquals": { "kms:ViaService": "s3.eu-central-1.amazonaws.com" }
+  }
+}

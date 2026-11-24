@@ -1,0 +1,13 @@
+{
+  "_comment": "Add to the Week 2 restricted bucket policy: exempt the Macie service-linked role from the Deny statements so Macie can scan the bucket (see HANDOFF.md). Replace <ACCOUNT_ID> before use.",
+  "Sid": "AllowMacieServiceLinkedRoleRead",
+  "Effect": "Allow",
+  "Principal": {
+    "AWS": "arn:aws:iam::<ACCOUNT_ID>:role/aws-service-role/macie.amazonaws.com/AWSServiceRoleForAmazonMacie"
+  },
+  "Action": ["s3:GetObject", "s3:GetObjectVersion", "s3:ListBucket", "s3:GetBucketLocation"],
+  "Resource": [
+    "arn:aws:s3:::dp-lab-restricted-<ACCOUNT_ID>",
+    "arn:aws:s3:::dp-lab-restricted-<ACCOUNT_ID>/*"
+  ]
+}
