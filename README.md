@@ -6,7 +6,7 @@
 | 1 | Data Lifecycle, Classification & S3 Security | Complete |
 | 2 | Encryption at Rest & Key Management (KMS) | Complete |
 | 3 | Encryption in Transit, Secrets & API Protection | Complete|
-| 4 | Data in Use, DLP, Privacy & Compliance | Not started |
+| 4 | Data in Use, DLP, Privacy & Compliance | Complete (Macie/GuardDuty blocked by account subscription, see week-4 README) |
 
 ## Start here
 Read `HANDOFF.md` first.
